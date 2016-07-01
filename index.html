@@ -113,10 +113,175 @@
           Thực sự có rất nhiều khó khăn trong bảng số liệu
         </aside>
       </section>
-      <!-- ------------------------------- -->
-      <!-- ------------------------------- -->
-      <!-- ------------------------------- -->
 
+      <section>
+        <h3>Các yếu tố ảnh hưởng?</h3>
+
+        <ul class="fragment">
+          <li>Quảng cáo</li>
+          <li>Khuyến mãi</li>
+          <li>Chỉ số</li>
+          <li>Mùa vụ</li>
+          <li>...</li>
+        </ul>
+
+        <aside class="notes">
+          Vậy các yếu tố nào đã ảnh hưởng đến doanh thu?
+          <br />
+          Sales được giả định là một hàm bị ảnh hưởng bởi chi phí quảng cáo, khuyến mãi và các điều kiện khác như chỉ số kinh
+          tế (index), mùa vụ, ... <br />
+          Thí sinh thử nghiệm mô hình ở nhiều trường hợp khác nhau, với các yếu tố khác nhau
+          ảnh hưởng, các yếu tố này có ý nghĩa, và lựa chọn ra các trường hợp tốt nhất
+          <br />
+        </aside>
+      </section>
+
+      <section>
+        <section class="th1">
+          <h3 style="text-transform: none;">
+            1. Sales ~ [ Prom + Adv + Index ]
+          </h3>
+
+          <aside class="notes">
+            TH1: Giả định doanh thu bị ảnh hưởng bởi quảng cáo,
+            khuyến mãi và chỉ số kinh tế thị trường.
+          </aside>
+        </section>
+        <section>
+          <h3 style="text-transform: none;">
+            2. Sales	~ [ Prom + Adv + Index + Season ]
+          </h3>
+          <aside class="notes">
+            TH2: Giả định doanh thu bị ảnh hưởng bởi quảng cáo, khuyến mãi, chỉ số thị
+trường và yếu tố mùa vụ (nóng/lạnh).
+          </aside>
+        </section>
+        <section>
+          <h3 style="text-transform: none;">
+            3. Sales	~ [ Prom + Adv + Index <br />+ Prev.Prom + Prev.Adv ]
+          </h3>
+          <aside class="notes">
+            TH3: Tương tự TH2, nhưng xét thêm yếu tố ảnh hưởng của quảng cáo và khuyến
+            mãi kéo dài đến quý tiếp theo
+          </aside>
+        </section>
+        <section>
+          <h3 style="text-transform: none;">
+            4. Sales	~ [ Prom + Adv + Index <br />+ Prev.Prom x2 + Prev.Adv x2 ]
+          </h3>
+          <aside class="notes">
+            TH4: Tương tự TH3, yếu tố ảnh hưởng của quảng cáo và khuyến mãi kéo dài đến
+            tận 2 quý tiếp theo
+          </aside>
+        </section>
+      </section>
+
+      <section>
+        <section class="th1">
+          <p>
+            Giả thiết 1
+          </p>
+          <p>
+            R<sup>2</sup> = 0.60585968
+          </p>
+          <img src="/img/entropy-th1.png" alt="" />
+        </section>
+
+        <section class="th2">
+          <p>
+            Giả thiết 2
+          </p>
+          <p>
+            R<sup>2</sup> = 0.624076656
+          </p>
+          <img src="/img/entropy-th2.png" alt="" />
+          <aside class="notes">
+            Để đưa ra giả thiết mùa có tham gia ảnh hưởng. <br />
+            Ở đây sử dụng thêm 1 biến dummy, là season. Mô tả mùa lạnh là 1, nóng => 0
+          </aside>
+        </section>
+
+        <section class="th3">
+          <p>
+            Giả thiết 3
+          </p>
+          <p>
+            R<sup>2</sup> = 0.90181253
+          </p>
+          <img src="/img/entropy-th3.png" alt="" />
+        </section>
+
+        <section class="th4">
+          <p>
+            Giả thiết 4
+          </p>
+          <p>
+            R<sup>2</sup> = 0.918456682
+          </p>
+          <img src="/img/entropy-th4.png" alt="" />
+        </section>
+      </section>
+
+      <section>
+        <table>
+          <tr>
+            <th></th>
+            <th align="center">TH3</th>
+            <th align="center">TH4</th>
+          </tr>
+          <tr>
+            <td>$$R^2$$</td>
+            <td>0.90181253</td>
+            <td>0.918456682</td>
+          </tr>
+          <tr>
+            <td title="trị thống kê">$$\bar{R}^2$$</td>
+            <td>0.867158129</td>
+            <td>0.874966913</td>
+          </tr>
+        </table>
+
+        <aside class="notes">
+          So sánh trong các trường hợp, em sử dụng chỉ số R^2 để so sánh ( tổng bình phương sai số dự báo nhỏ) <br />
+          hay nói cách khác độ phù hợp của mô hình đối với dữ liệu càng lớn <br />
+
+          Tuy nhiên một tính chất đặc trưng quan trọng của là
+          nó có xu hướng tăng khi <strong>số biến giải thích</strong> trong mô hình tăng lên.
+
+          Sử dụng thêm chỉ số R^2 gạch đầu (trị thống kê hiệu chỉnh)
+        </aside>
+      </section>
+
+      <section>
+        <p>
+          TH4
+        </p>
+        <img src="/img/entropy-th4-question.png" alt="" />
+
+        <aside class="notes">
+          Quan sát thấy Prev2Prom và Prev2Adv có P-value khá cao. nên ảnh hưởng đến độ chính xác
+          và không có ý nghĩa nhiều trong thống kê.
+          <br />
+          Có thể suy ra rằng 2 ảnh hưởng có QC có ảnh hưởng nhưng k kéo dài quá lâu.
+          <br /> ==> Điều này cũng hợp lý.
+          <br /> Bỏ 2 giá trị này ra
+        </aside>
+      </section>
+
+      <section>
+        <p>
+          Mô hình:
+          <p>
+            Sales = 755,65 + 6,54Prom + 2,52Adv − 4,95Index + 66,6 Season − 3,49PrevProm + 2,87PrevAdv
+          </p>
+        </p>
+
+        <aside class="notes">
+          Nhìn vào mô hình thấy được ảnh hưởng của KM > QC.
+          <br />
+          ...
+        </aside>
+      </section>
 
       <section class="left">
         <h1>THANK YOU</h1>
@@ -124,7 +289,7 @@
           <img src="img/tho-bay-mau-end.png" />
         </p>
         <aside class="notes">
-          
+
         </aside>
       </section>
 
@@ -187,6 +352,9 @@
           async: true
         }, {
           src: 'plugin/multiplex/client.js',
+          async: true
+        },{
+          src: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML',
           async: true
         },
 

@@ -6,6 +6,9 @@
 # Credits
 
 * **[reveal-js](http://lab.hakim.se/reveal-js/)** (The HTML Presentation Framework)
+
+# More
+
 * **BGate Intro**: http://bgate.talk.duyetdev.com
 * **Entropy**: http://entropy.talk.duyetdev.com
 * **Why Docker?**: http://why-docker.talk.duyetdev.com/
